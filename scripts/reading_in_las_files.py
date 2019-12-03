@@ -27,7 +27,7 @@ lidar_df=DataFrame(lidar_points, columns = ["X","Y","Z","intensity",
 
 #Transform to geopandas GeoDataFrame
 crs = None
-geometry = [Point(xyz) for xyz in zip(inFile.X,inFile.Y,inFile.Z)]
+geometry = [Point(xyz) for xyz in zip(inFile.X/1000,inFile.Y/1000,inFile.Z)]
 lidar_geodf = GeoDataFrame(lidar_df, crs=crs, geometry=geometry)
 
 # set correct coordinate reference system
@@ -35,3 +35,5 @@ lidar_geodf.crs = {'init': 'epsg:6487'}
 
 # reproject to CRS 4326 (Same as building footrpint data) 
 lidar_geodf['geometry'] = lidar_geodf['geometry'].to_crs(epsg=4326)
+
+38940126.000, 14019987.000
